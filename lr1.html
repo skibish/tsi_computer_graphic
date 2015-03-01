@@ -7,7 +7,7 @@
 
 <body>
 
-    <script type="text/javascript">
+<script type="text/javascript">
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
@@ -18,47 +18,51 @@
     camera.lookAt(new THREE.Vector3(0, 0, 0));
     scene = new THREE.Scene();
 
-    var material = new THREE.LineBasicMaterial({
-        color: 0x0000ff
-    });
+    var points = 500;
 
+    var curveS = new THREE.SplineCurve3([
+                new THREE.Vector3(-3, 5, 0),
+                new THREE.Vector3(-3, 7, 0),
+                new THREE.Vector3(-1, 7, 0),
+                new THREE.Vector3(-1, 8, 0),
+                new THREE.Vector3(-4, 8, 0),
+                new THREE.Vector3(-4, 4, 0),
+                new THREE.Vector3(-2, 4, 0),
+                new THREE.Vector3(-2, 4, 0),
+                new THREE.Vector3(-2, 2, 0),
+                new THREE.Vector3(-4, 2, 0),
+                new THREE.Vector3(-4, 1, 0),
+                new THREE.Vector3(-1, 1, 0),
+                new THREE.Vector3(-1, 5, 0),
+                new THREE.Vector3(-3, 5, 0),
+                new THREE.Vector3(-3, 7, 0)]
+    );
     var geometryS = new THREE.Geometry();
-    geometryS.vertices.push(new THREE.Vector3(-3, 5, 0));
-    geometryS.vertices.push(new THREE.Vector3(-3, 7, 0));
-    geometryS.vertices.push(new THREE.Vector3(-1, 7, 0));
-    geometryS.vertices.push(new THREE.Vector3(-1, 8, 0));
-    geometryS.vertices.push(new THREE.Vector3(-4, 8, 0));
-    geometryS.vertices.push(new THREE.Vector3(-4, 4, 0));
-    geometryS.vertices.push(new THREE.Vector3(-2, 4, 0));
-    geometryS.vertices.push(new THREE.Vector3(-2, 4, 0));
-    geometryS.vertices.push(new THREE.Vector3(-2, 2, 0));
-    geometryS.vertices.push(new THREE.Vector3(-4, 2, 0));
-    geometryS.vertices.push(new THREE.Vector3(-4, 1, 0));
-    geometryS.vertices.push(new THREE.Vector3(-1, 1, 0));
-    geometryS.vertices.push(new THREE.Vector3(-1, 5, 0));
-    geometryS.vertices.push(new THREE.Vector3(-3, 5, 0));
-    geometryS.vertices.push(new THREE.Vector3(-3, 7, 0));
-    var lineS = new THREE.Line(geometryS);
+    geometryS.vertices = curveS.getPoints(points);
+    var curveObjectS = new THREE.Line(geometryS);
 
+    var curveK = new THREE.SplineCurve3([
+                new THREE.Vector3(1, 1, 0),
+                new THREE.Vector3(1, 8, 0),
+                new THREE.Vector3(2, 8, 0),
+                new THREE.Vector3(2, 5, 0),
+                new THREE.Vector3(4, 8, 0),
+                new THREE.Vector3(5, 8, 0),
+                new THREE.Vector3(2.5, 4.5, 0),
+                new THREE.Vector3(5, 1, 0),
+                new THREE.Vector3(4, 1, 0),
+                new THREE.Vector3(2, 4, 0),
+                new THREE.Vector3(2, 1, 0),
+                new THREE.Vector3(1, 1, 0)]
+    );
     var geometryK = new THREE.Geometry();
-    geometryK.vertices.push(new THREE.Vector3(1, 1, 0));
-    geometryK.vertices.push(new THREE.Vector3(1, 8, 0));
-    geometryK.vertices.push(new THREE.Vector3(2, 8, 0));
-    geometryK.vertices.push(new THREE.Vector3(2, 5, 0));
-    geometryK.vertices.push(new THREE.Vector3(4, 8, 0));
-    geometryK.vertices.push(new THREE.Vector3(5, 8, 0));
-    geometryK.vertices.push(new THREE.Vector3(2.5, 4.5, 0));
-    geometryK.vertices.push(new THREE.Vector3(5, 1, 0));
-    geometryK.vertices.push(new THREE.Vector3(4, 1, 0));
-    geometryK.vertices.push(new THREE.Vector3(2, 4, 0));
-    geometryK.vertices.push(new THREE.Vector3(2, 1, 0));
-    geometryK.vertices.push(new THREE.Vector3(1, 1, 0));
-    var lineK = new THREE.Line(geometryK);
+    geometryK.vertices = curveK.getPoints(points);
+    var curveObjectK = new THREE.Line(geometryK);
 
-    scene.add(lineS);
-    scene.add(lineK);
+    scene.add(curveObjectS);
+    scene.add(curveObjectK);
     renderer.render(scene, camera);
-    </script>
+</script>
 </body>
 
 </html>
