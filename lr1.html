@@ -23,40 +23,53 @@
     });
 
     var geometryS = new THREE.Geometry();
-    geometryS.vertices.push(new THREE.Vector3(-3, 5, 0));
-    geometryS.vertices.push(new THREE.Vector3(-3, 7, 0));
-    geometryS.vertices.push(new THREE.Vector3(-1, 7, 0));
-    geometryS.vertices.push(new THREE.Vector3(-1, 8, 0));
-    geometryS.vertices.push(new THREE.Vector3(-4, 8, 0));
-    geometryS.vertices.push(new THREE.Vector3(-4, 4, 0));
-    geometryS.vertices.push(new THREE.Vector3(-2, 4, 0));
-    geometryS.vertices.push(new THREE.Vector3(-2, 4, 0));
-    geometryS.vertices.push(new THREE.Vector3(-2, 2, 0));
-    geometryS.vertices.push(new THREE.Vector3(-4, 2, 0));
-    geometryS.vertices.push(new THREE.Vector3(-4, 1, 0));
-    geometryS.vertices.push(new THREE.Vector3(-1, 1, 0));
-    geometryS.vertices.push(new THREE.Vector3(-1, 5, 0));
-    geometryS.vertices.push(new THREE.Vector3(-3, 5, 0));
-    geometryS.vertices.push(new THREE.Vector3(-3, 7, 0));
+    geometryS.vertices.push(new THREE.Vector3(-3, 5, -0.1));
+    geometryS.vertices.push(new THREE.Vector3(-3, 7, -0.1));
+    geometryS.vertices.push(new THREE.Vector3(-1, 7, -0.1));
+    geometryS.vertices.push(new THREE.Vector3(-1, 8, -0.1));
+    geometryS.vertices.push(new THREE.Vector3(-4, 8, -0.1));
+    geometryS.vertices.push(new THREE.Vector3(-4, 4, -0.1));
+    geometryS.vertices.push(new THREE.Vector3(-2, 4, -0.1));
+    geometryS.vertices.push(new THREE.Vector3(-2, 4, -0.1));
+    geometryS.vertices.push(new THREE.Vector3(-2, 2, -0.1));
+    geometryS.vertices.push(new THREE.Vector3(-4, 2, -0.1));
+    geometryS.vertices.push(new THREE.Vector3(-4, 1, -0.1));
+    geometryS.vertices.push(new THREE.Vector3(-1, 1, -0.1));
+    geometryS.vertices.push(new THREE.Vector3(-1, 5, -0.1));
+    geometryS.vertices.push(new THREE.Vector3(-3, 5, -0.1));
+    geometryS.vertices.push(new THREE.Vector3(-3, 7, -0.1));
     var lineS = new THREE.Line(geometryS);
 
     var geometryK = new THREE.Geometry();
-    geometryK.vertices.push(new THREE.Vector3(1, 1, 0));
-    geometryK.vertices.push(new THREE.Vector3(1, 8, 0));
-    geometryK.vertices.push(new THREE.Vector3(2, 8, 0));
-    geometryK.vertices.push(new THREE.Vector3(2, 5, 0));
-    geometryK.vertices.push(new THREE.Vector3(4, 8, 0));
-    geometryK.vertices.push(new THREE.Vector3(5, 8, 0));
-    geometryK.vertices.push(new THREE.Vector3(2.5, 4.5, 0));
-    geometryK.vertices.push(new THREE.Vector3(5, 1, 0));
-    geometryK.vertices.push(new THREE.Vector3(4, 1, 0));
-    geometryK.vertices.push(new THREE.Vector3(2, 4, 0));
-    geometryK.vertices.push(new THREE.Vector3(2, 1, 0));
-    geometryK.vertices.push(new THREE.Vector3(1, 1, 0));
+    geometryK.vertices.push(new THREE.Vector3(1, 1, -0.1));
+    geometryK.vertices.push(new THREE.Vector3(1, 8, -0.1));
+    geometryK.vertices.push(new THREE.Vector3(2, 8, -0.1));
+    geometryK.vertices.push(new THREE.Vector3(2, 5, -0.1));
+    geometryK.vertices.push(new THREE.Vector3(4, 8, -0.1));
+    geometryK.vertices.push(new THREE.Vector3(5, 8, -0.1));
+    geometryK.vertices.push(new THREE.Vector3(2.5, 4.5, -0.1));
+    geometryK.vertices.push(new THREE.Vector3(5, 1, -0.1));
+    geometryK.vertices.push(new THREE.Vector3(4, 1, -0.1));
+    geometryK.vertices.push(new THREE.Vector3(2, 4, -0.1));
+    geometryK.vertices.push(new THREE.Vector3(2, 1, -0.1));
+    geometryK.vertices.push(new THREE.Vector3(1, 1, -0.1));
     var lineK = new THREE.Line(geometryK);
+
+    var rectLength = 120, rectWidth = 40;
+
+    var rectShape = new THREE.Shape();
+    rectShape.moveTo( -30,-25 );
+    rectShape.lineTo( 30, 30 );
+    rectShape.lineTo( 30, -30 );
+    rectShape.lineTo( 0, -50 );
+    rectShape.lineTo( -50, -50 );
+
+    var rectGeom = new THREE.ShapeGeometry( rectShape );
+    var rectMesh = new THREE.Mesh( rectGeom, new THREE.MeshBasicMaterial( { color: 0x000000 } ) ) ;
 
     scene.add(lineS);
     scene.add(lineK);
+    scene.add( rectMesh );
     renderer.render(scene, camera);
     </script>
 </body>
