@@ -60,12 +60,43 @@
 
     animateScene();
 
+    var moveUpK = true;
+    var moveUpS = true;
+
     /**
      * Rotate lines
      */
     function animateScene() {
         lineK.rotation.y += 0.05; lineK.rotation.x += 0.001;
-        lineS.rotation.y += 0.05; lineS.rotation.x += 0.001;
+        lineS.rotation.y -= 0.05; lineS.rotation.x += 0.001;
+
+        if (moveUpK) {
+            lineK.position.x += 0.05;
+            lineK.position.y += 0.05;
+            lineK.scale.x -= 0.05;
+            lineK.scale.y -= 0.05;
+            if (lineK.position.x >= 5) { moveUpK = false; }
+        } else {
+            lineK.position.x -= 0.05;
+            lineK.position.y -= 0.05;
+            lineK.scale.x += 0.05;
+            lineK.scale.y += 0.05;
+            if (lineK.position.x <= 0) { moveUpK = true; }
+        }
+
+        if (moveUpS) {
+            lineS.position.x -= 0.05;
+            lineS.position.y -= 0.05;
+            lineS.scale.x += 0.05;
+            lineS.scale.y += 0.05;
+            if (lineS.position.x <= -5) { moveUpS = false; }
+        } else {
+            lineS.position.x += 0.05;
+            lineS.position.y += 0.05;
+            lineS.scale.x -= 0.05;
+            lineS.scale.y -= 0.05;
+            if (lineS.position.x >= 0) { moveUpS = true; }
+        }
 
         requestAnimationFrame(animateScene);
 
