@@ -3,11 +3,12 @@
 
 <head>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 </head>
 
 <body>
 
-    <script type="text/javascript">
+<script type="text/javascript">
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
@@ -18,89 +19,119 @@
     camera.lookAt(new THREE.Vector3(0, 0, 0));
     scene = new THREE.Scene();
 
-    var material = new THREE.LineBasicMaterial({
-        color: 0x0000ff
-    });
+    var material = new THREE.LineBasicMaterial();
 
-    var geometryS = new THREE.Geometry();
-    geometryS.vertices.push(new THREE.Vector3(-3, 5, 0));
-    geometryS.vertices.push(new THREE.Vector3(-3, 7, 0));
-    geometryS.vertices.push(new THREE.Vector3(-1, 7, 0));
-    geometryS.vertices.push(new THREE.Vector3(-1, 8, 0));
-    geometryS.vertices.push(new THREE.Vector3(-4, 8, 0));
-    geometryS.vertices.push(new THREE.Vector3(-4, 4, 0));
-    geometryS.vertices.push(new THREE.Vector3(-2, 4, 0));
-    geometryS.vertices.push(new THREE.Vector3(-2, 4, 0));
-    geometryS.vertices.push(new THREE.Vector3(-2, 2, 0));
-    geometryS.vertices.push(new THREE.Vector3(-4, 2, 0));
-    geometryS.vertices.push(new THREE.Vector3(-4, 1, 0));
-    geometryS.vertices.push(new THREE.Vector3(-1, 1, 0));
-    geometryS.vertices.push(new THREE.Vector3(-1, 5, 0));
-    geometryS.vertices.push(new THREE.Vector3(-3, 5, 0));
-    geometryS.vertices.push(new THREE.Vector3(-3, 7, 0));
-    var lineS = new THREE.Line(geometryS);
+    // Front S
+    var geometryFrontS = new THREE.Geometry();
+    geometryFrontS.vertices.push(new THREE.Vector3(-3, 5, 0));
+    geometryFrontS.vertices.push(new THREE.Vector3(-3, 7, 0));
+    geometryFrontS.vertices.push(new THREE.Vector3(-1, 7, 0));
+    geometryFrontS.vertices.push(new THREE.Vector3(-1, 8, 0));
+    geometryFrontS.vertices.push(new THREE.Vector3(-4, 8, 0));
+    geometryFrontS.vertices.push(new THREE.Vector3(-4, 4, 0));
+    geometryFrontS.vertices.push(new THREE.Vector3(-2, 4, 0));
+    geometryFrontS.vertices.push(new THREE.Vector3(-2, 2, 0));
+    geometryFrontS.vertices.push(new THREE.Vector3(-4, 2, 0));
+    geometryFrontS.vertices.push(new THREE.Vector3(-4, 1, 0));
+    geometryFrontS.vertices.push(new THREE.Vector3(-1, 1, 0));
+    geometryFrontS.vertices.push(new THREE.Vector3(-1, 5, 0));
+    geometryFrontS.vertices.push(new THREE.Vector3(-3, 5, 0));
 
-    var geometryK = new THREE.Geometry();
-    geometryK.vertices.push(new THREE.Vector3(1, 1, 0));
-    geometryK.vertices.push(new THREE.Vector3(1, 8, 0));
-    geometryK.vertices.push(new THREE.Vector3(2, 8, 0));
-    geometryK.vertices.push(new THREE.Vector3(2, 5, 0));
-    geometryK.vertices.push(new THREE.Vector3(4, 8, 0));
-    geometryK.vertices.push(new THREE.Vector3(5, 8, 0));
-    geometryK.vertices.push(new THREE.Vector3(2.5, 4.5, 0));
-    geometryK.vertices.push(new THREE.Vector3(5, 1, 0));
-    geometryK.vertices.push(new THREE.Vector3(4, 1, 0));
-    geometryK.vertices.push(new THREE.Vector3(2, 4, 0));
-    geometryK.vertices.push(new THREE.Vector3(2, 1, 0));
-    geometryK.vertices.push(new THREE.Vector3(1, 1, 0));
-    var lineK = new THREE.Line(geometryK);
+    //    Back S
+    var geometryBackS = new THREE.Geometry();
+    geometryBackS.vertices.push(new THREE.Vector3(-3, 5, -1));
+    geometryBackS.vertices.push(new THREE.Vector3(-3, 7, -1));
+    geometryBackS.vertices.push(new THREE.Vector3(-1, 7, -1));
+    geometryBackS.vertices.push(new THREE.Vector3(-1, 8, -1));
+    geometryBackS.vertices.push(new THREE.Vector3(-4, 8, -1));
+    geometryBackS.vertices.push(new THREE.Vector3(-4, 4, -1));
+    geometryBackS.vertices.push(new THREE.Vector3(-2, 4, -1));
+    geometryBackS.vertices.push(new THREE.Vector3(-2, 2, -1));
+    geometryBackS.vertices.push(new THREE.Vector3(-4, 2, -1));
+    geometryBackS.vertices.push(new THREE.Vector3(-4, 1, -1));
+    geometryBackS.vertices.push(new THREE.Vector3(-1, 1, -1));
+    geometryBackS.vertices.push(new THREE.Vector3(-1, 5, -1));
+    geometryBackS.vertices.push(new THREE.Vector3(-3, 5, -1));
 
-    scene.add(lineS);
-    scene.add(lineK);
+    geometryFrontS.merge(geometryBackS);
 
-    animateScene();
 
-    var moveUpK = true;
-    var moveUpS = true;
+    var line1 = new THREE.Geometry();
+    line1.vertices.push(new THREE.Vector3(-3, 7, -1));
+    line1.vertices.push(new THREE.Vector3(-3, 7, 0));
+
+    var line2 = new THREE.Geometry();
+    line2.vertices.push(new THREE.Vector3(-1, 7, -1));
+    line2.vertices.push(new THREE.Vector3(-1, 7, 0));
+
+    var line3 = new THREE.Geometry();
+    line3.vertices.push(new THREE.Vector3(-1, 8, -1));
+    line3.vertices.push(new THREE.Vector3(-1, 8, 0));
+
+    var line4 = new THREE.Geometry();
+    line3.vertices.push(new THREE.Vector3(-4, 8, -1));
+    line3.vertices.push(new THREE.Vector3(-4, 8, 0));
+
+    var line5 = new THREE.Geometry();
+    line5.vertices.push(new THREE.Vector3(-4, 4, -1));
+    line5.vertices.push(new THREE.Vector3(-4, 4, 0));
+
+    var line6 = new THREE.Geometry();
+    line6.vertices.push(new THREE.Vector3(-2, 4, -1));
+    line6.vertices.push(new THREE.Vector3(-2, 4, 0));
+
+    var line7 = new THREE.Geometry();
+    line7.vertices.push(new THREE.Vector3(-2, 2, -1));
+    line7.vertices.push(new THREE.Vector3(-2, 2, 0));
+
+    var line8 = new THREE.Geometry();
+    line8.vertices.push(new THREE.Vector3(-4, 2, -1));
+    line8.vertices.push(new THREE.Vector3(-4, 2, 0));
+
+    var line9 = new THREE.Geometry();
+    line9.vertices.push(new THREE.Vector3(-4, 1, -1));
+    line9.vertices.push(new THREE.Vector3(-4, 1, 0));
+
+    var line10 = new THREE.Geometry();
+    line10.vertices.push(new THREE.Vector3(-1, 1, -1));
+    line10.vertices.push(new THREE.Vector3(-1, 1, 0));
+
+    var line11 = new THREE.Geometry();
+    line11.vertices.push(new THREE.Vector3(-1, 5, -1));
+    line11.vertices.push(new THREE.Vector3(-1, 5, 0));
+
+    var line12 = new THREE.Geometry();
+    line12.vertices.push(new THREE.Vector3(-3, 5, -1));
+    line12.vertices.push(new THREE.Vector3(-3, 5, 0));
+
+    geometryFrontS.merge(line1);
+    geometryFrontS.merge(line2);
+    geometryFrontS.merge(line3);
+    geometryFrontS.merge(line4);
+    geometryFrontS.merge(line5);
+    geometryFrontS.merge(line6);
+    geometryFrontS.merge(line7);
+    geometryFrontS.merge(line8);
+    geometryFrontS.merge(line9);
+    geometryFrontS.merge(line10);
+    geometryFrontS.merge(line11);
+    geometryFrontS.merge(line12);
+
+    var lineS3D = new THREE.Line(geometryFrontS, material, THREE.LineStrip);
+
+    scene.add(lineS3D);
+    renderer.render(scene, camera);
+
+//    animateScene();
 
     /**
      * Rotate lines
      */
     function animateScene() {
-        lineK.rotation.y += 0.05; lineK.rotation.x += 0.001;
-        lineS.rotation.y -= 0.05; lineS.rotation.x += 0.001;
+        lineS3D.rotation.x += 0.01;
+//        requestAnimationFrame(animateScene);
 
-        if (moveUpK) {
-            lineK.position.x += 0.05;
-            lineK.position.y += 0.05;
-            lineK.scale.x -= 0.05;
-            lineK.scale.y -= 0.05;
-            if (lineK.position.x >= 5) { moveUpK = false; }
-        } else {
-            lineK.position.x -= 0.05;
-            lineK.position.y -= 0.05;
-            lineK.scale.x += 0.05;
-            lineK.scale.y += 0.05;
-            if (lineK.position.x <= 0) { moveUpK = true; }
-        }
-
-        if (moveUpS) {
-            lineS.position.x -= 0.05;
-            lineS.position.y -= 0.05;
-            lineS.scale.x += 0.05;
-            lineS.scale.y += 0.05;
-            if (lineS.position.x <= -5) { moveUpS = false; }
-        } else {
-            lineS.position.x += 0.05;
-            lineS.position.y += 0.05;
-            lineS.scale.x -= 0.05;
-            lineS.scale.y -= 0.05;
-            if (lineS.position.x >= 0) { moveUpS = true; }
-        }
-
-        requestAnimationFrame(animateScene);
-
-        renderScene();
+//        renderScene();
     }
 
     /**
@@ -109,7 +140,74 @@
     function renderScene() {
         renderer.render(scene, camera);
     }
-    </script>
+
+    $(document).keypress(function(e) {
+        console.log(e.which);
+        if(e.which == 50) {
+            lineS3D.rotation.x += 0.1;
+            renderScene();
+        }
+
+        if(e.which == 56) {
+            lineS3D.rotation.x -= 0.1;
+            renderScene();
+        }
+
+        if(e.which == 52) {
+            lineS3D.rotation.y -= 0.1;
+            renderScene();
+        }
+
+        if(e.which == 54) {
+            lineS3D.rotation.y += 0.1;
+            renderScene();
+        }
+
+        if(e.which == 119) {
+            lineS3D.scale.x -= 0.1;
+            lineS3D.scale.y -= 0.1;
+            renderScene();
+        }
+
+        if(e.which == 115) {
+            lineS3D.scale.x += 0.1;
+            lineS3D.scale.y += 0.1;
+            renderScene();
+        }
+
+        if(e.which == 122) {
+            lineS3D.position.x -= 0.1;
+            renderScene();
+        }
+
+        if(e.which == 120) {
+            lineS3D.position.x += 0.1;
+            renderScene();
+        }
+
+        if(e.which == 99) {
+            lineS3D.position.y += 0.1;
+            renderScene();
+        }
+
+        if(e.which == 118) {
+            lineS3D.position.y -= 0.1;
+            renderScene();
+        }
+
+        if(e.which == 98) {
+            lineS3D.position.z += 0.1;
+            renderScene();
+        }
+
+        if(e.which == 110) {
+            lineS3D.position.z -= 0.1;
+            renderScene();
+        }
+
+    });
+
+</script>
 </body>
 
 </html>
